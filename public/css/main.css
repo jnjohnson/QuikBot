@@ -1,0 +1,18 @@
+#searchBox {
+    display: block;
+    margin: 0 auto;
+
+    width: 400px;
+}
+
+#formError {
+    display: block;
+    margin: 0 auto;
+
+    width: 400px;
+    height: 24px;
+}
+
+.error {
+    margin-bottom: 0px;
+}
