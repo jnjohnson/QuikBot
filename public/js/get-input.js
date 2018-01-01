@@ -25,9 +25,6 @@ user.init = function(){
                     else if (res.responseText == "invalid input"){
                         createErrorMsg("Invalid characters used in search");
                     }
-                    else {
-
-                    }
                 });
             }
         }, false);
