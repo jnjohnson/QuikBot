@@ -27,7 +27,32 @@
             </div>
         </div>
     </form>
-    <div class="row">
-        <hr>
-    </div>
+    {{#if searchResults}}
+        <div class="row justify-content-around">
+            <div class="col-12 col-sm-4">
+                <div class="alert alert-success">
+                    <p class="text-center">This is a success</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="alert alert-success">
+                    <p class="text-center">This is a success</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="alert alert-danger">
+                    <p class="text-center">This is a failure</p>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    {{#if noResults}}
+        <div class="row justify-content-around mt-5">
+            <div class="col-12 col-sm-8">
+                <div class="alert alert-danger">
+                    <p class="text-center">We were unable to find any results for {{itemName}}</p>
+                </div>
+            </div>
+        </div>
+    {{/if}}
 </div>
