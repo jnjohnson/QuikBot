@@ -3,7 +3,7 @@ var searchValidation = /^[-\sa-zA-Z0-9]+$/;
 module.exports = {
 	/*THIS PROVIDES THE CONTENT FOR THE INDEX PAGE*/
     index: function(req, res){
-          res.render('user/home');
+          res.render('user/home',{searchResults: false, noResults: false, itemName: ''});
      },
      
      /* This function is called when a user clicks the 'Search' button */
