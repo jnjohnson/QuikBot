@@ -7,7 +7,9 @@ This idea came about because my sister was trying to buy an NES Classic for her 
 ## Start up
 
 To get the project set up:
+
 `npm init`
 
 To start up the server:
+
 `node index.js`
