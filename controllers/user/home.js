@@ -1,23 +1,24 @@
 var searchValidation = /^[-\sa-zA-Z0-9]+$/;
+var amazon = require('./amazon.js');
 
 module.exports = {
 	/*THIS PROVIDES THE CONTENT FOR THE INDEX PAGE*/
     index: function(req, res){
-          res.render('user/home',{searchResults: false, noResults: false, itemName: ''});
+        res.render('user/home',{searchResults: false, noResults: false, itemName: ''});
      },
      
      /* This function is called when a user clicks the 'Search' button */
     search: function(req, res){
-        console.log(req.body.itemName);
+        var data = JSON.parse(req.body.data);
 
-        var item = req.body.itemName;
-        if (item == ''){
+        if (data == ''){
             res.send("no item");
         }
-        else if (!searchValidation.test(item)) {
+        else if (!searchValidation.test(data)) {
             res.send("invalid input");
         }
         else {
+            amazon.data.searchForItem(data);
             res.send("valid input");
         }
     }
