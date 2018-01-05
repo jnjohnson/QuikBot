@@ -18,6 +18,7 @@ user.init = function(){
             }
             else {
                 data = JSON.stringify(data);
+                console.log(data);
                 Ajax.sendRequest('/', function(res){
                     if (res.responseText == "no item"){
                         createErrorMsg("You need to input an item!");
@@ -25,7 +26,11 @@ user.init = function(){
                     else if (res.responseText == "invalid input"){
                         createErrorMsg("Invalid characters used in search");
                     }
-                });
+                    else {
+                        console.log(res.responseText);
+                        console.log("hello");
+                    }
+                }, data);
             }
         }, false);
 	}
