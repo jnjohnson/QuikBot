@@ -4,7 +4,7 @@ var amazon = require('./amazon.js');
 module.exports = {
 	/*THIS PROVIDES THE CONTENT FOR THE INDEX PAGE*/
     index: function(req, res){
-        res.render('user/home',{searchResults: false, noResults: false, itemName: ''});
+        res.render('user/home');
      },
      
      /* This function is called when a user clicks the 'Search' button */
@@ -18,8 +18,8 @@ module.exports = {
             res.send("invalid input");
         }
         else {
-            amazon.data.searchForItem(data);
-            res.send("valid input");
+            console.log(amazon.searchForItem(data));
+            res.send("Success^^^" + amazon.searchForItem(data));
         }
     }
 }
