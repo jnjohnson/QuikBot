@@ -18,7 +18,6 @@ user.init = function(){
             }
             else {
                 data = JSON.stringify(data);
-                console.log(data);
                 Ajax.sendRequest('/', function(res){
                     if (res.responseText == "no item"){
                         createErrorMsg("You need to input an item!");
@@ -28,7 +27,7 @@ user.init = function(){
                     }
                     else {
                         console.log(res.responseText);
-                        console.log("hello");
+                        document.getElementById("searchResults").innerHTML = res.responseText;
                     }
                 }, data);
             }
