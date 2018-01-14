@@ -18,8 +18,7 @@ module.exports = {
             res.send("invalid input");
         }
         else {
-            console.log(amazon.searchForItem(data));
-            res.send("Success^^^" + amazon.searchForItem(data));
+            amazon.createProductThumbnails(res, data);
         }
     }
 }
