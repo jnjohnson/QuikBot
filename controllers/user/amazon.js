@@ -7,25 +7,23 @@ var client = amazon.createClient({
 
 var amazonMethods = {};
 
-amazonMethods.searchForItem = function(itemName){
+amazonMethods.createProductThumbnails = function(res, itemName){
     client.itemSearch({
         ResponseGroup: 'Images, ItemAttributes, Offers',
         SearchIndex: 'VideoGames',
         Title: itemName
     }).then(function(results){
         var html = '';
-        for (i=0; i<= results.length-1; i++){
-            html += amazonMethods.createProductThumbnail(results[i]);
+        for (var product in results){
+            html += amazonMethods.generateHTML(results[product]);
         }
-        return "html";
+        res.send(html);
     }).catch(function(err){
         console.log(err);
-        return "failure";
     });
-    return "hello";
-};
+}
 
-amazonMethods.createProductThumbnail = function(result){
+amazonMethods.generateHTML = function(result){
     var html =  '<div class="product-box"><a target="_blank" href=' + result.DetailPageURL[0] + '>' +
                 '<img src=' + result.MediumImage[0]["URL"][0] + '></a><div class="product-title">'+
                 '<h3>' + result.ItemAttributes[0]["Title"][0] + '</h3></div><p class="product-price">'+ result.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0] +'<br>'+
