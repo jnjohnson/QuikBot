@@ -7,8 +7,9 @@ var client = amazon.createClient({
 
 var amazonMethods = {};
 
-amazonMethods.createProductThumbnails = function(res, itemName){
+amazonMethods.createProductThumbnails = function(res, itemName, pageNum){
     client.itemSearch({
+        itemPage: pageNum,
         ResponseGroup: 'Images, ItemAttributes, Offers',
         SearchIndex: 'VideoGames',
         Title: itemName
