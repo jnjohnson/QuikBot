@@ -26,7 +26,6 @@ user.init = function(){
                         createErrorMsg("Invalid characters used in search");
                     }
                     else {
-                        console.log(res.responseText);
                         document.getElementById("searchResults").innerHTML = res.responseText;
                     }
                 }, data);
