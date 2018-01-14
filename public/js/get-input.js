@@ -3,18 +3,25 @@ user = {}
 var searchValidation = /^[-\sa-zA-Z0-9]+$/;
 
 user.init = function(){
+    var itemName;
 	if (document.getElementById("searchBtn")){
 		document.getElementById("searchBtn").addEventListener("click", function(){
             clearErrorMsgs();
 
-            var data = document.getElementById("searchBox").value;
-            if (data == ''){
-                console.log("no item submitted");
+            var data = {};
+            data.itemName   = document.getElementById("searchBox").value;
+            data.pageNum    = 1;
+
+            itemName = data.itemName;
+
+            if (data.itemName == ''){
                 createErrorMsg("You need to input an item!");
             }
-            else if (!searchValidation.test(data)) {
-                console.log("invalid input");
+            else if (!searchValidation.test(data.itemName)) {
                 createErrorMsg("Invalid characters used in search");
+            }
+            else if (isNan(data.pageNum)){
+                createErrorMsg("An error occurred");
             }
             else {
                 data = JSON.stringify(data);
@@ -24,6 +31,9 @@ user.init = function(){
                     }
                     else if (res.responseText == "invalid input"){
                         createErrorMsg("Invalid characters used in search");
+                    }
+                    else if (res.responseText == "An error occurred"){
+                        createErrorMsg("An error occurred");
                     }
                     else {
                         document.getElementById("searchResults").innerHTML = res.responseText;
