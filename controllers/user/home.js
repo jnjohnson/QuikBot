@@ -10,15 +10,17 @@ module.exports = {
      /* This function is called when a user clicks the 'Search' button */
     search: function(req, res){
         var data = JSON.parse(req.body.data);
-
-        if (data == ''){
+        if (data.itemName == ''){
             res.send("no item");
         }
-        else if (!searchValidation.test(data)) {
+        else if (!searchValidation.test(data.itemName)) {
             res.send("invalid input");
         }
+        else if (isNaN(data.pageNum)){
+            res.send("An error occurred");
+        }
         else {
-            amazon.createProductThumbnails(res, data);
+            amazon.createProductThumbnails(res, data.itemName, data.pageNum);
         }
     }
 }
