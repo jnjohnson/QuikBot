@@ -16,6 +16,9 @@
     "express-session": "^1.15.6"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.0",
+    "gulp-sass": "^3.1.0",
     "nodemon": "^1.14.11"
   }
 }

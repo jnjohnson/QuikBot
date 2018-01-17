@@ -1,0 +1,38 @@
+@import './partials/override';
+@import './partials/amazon';
+
+body {
+    font: 100% Helvetica, sans-serif;
+}
+
+#searchBox {
+    display: block;
+    margin: 0 auto;
+
+    width: 400px;
+}
+
+#formError {
+    display: block;
+    margin: 0 auto;
+
+    width: 400px;
+    height: 24px;
+}
+
+.results-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    margin-bottom: 100px;
+}
+
+.error {
+    margin-bottom: 0px;
+}
+
+.center-element {
+    display: block;
+    margin: 0 auto;
+}
