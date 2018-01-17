@@ -13,7 +13,7 @@
     height: 24px;
 }
 
-#searchResults {
+.results-page {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -32,4 +32,12 @@
 
 .img-height {
     height: 160px;
+}
+
+.carousel-control-prev{
+    left: -104px;
+}
+
+.carousel-control-next{
+    right: -104px;
 }
