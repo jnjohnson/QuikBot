@@ -20,7 +20,7 @@ user.init = function(){
             else if (!searchValidation.test(data.itemName)) {
                 createErrorMsg("Invalid characters used in search");
             }
-            else if (isNan(data.pageNum)){
+            else if (isNaN(data.pageNum)){
                 createErrorMsg("An error occurred");
             }
             else {
