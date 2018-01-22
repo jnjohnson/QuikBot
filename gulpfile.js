@@ -7,10 +7,9 @@ var sassDest  = './public/css/dest/';
 gulp.task('default',    defaultTask);
 gulp.task('sass',       compileSass);
 gulp.task('watchSass',  watchSass);
-gulp.task('watch',      ['watchSass']);
+gulp.task('watch',      watchSass);
 
 function defaultTask(done) {
-
   done();
 }
 
