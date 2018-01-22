@@ -33,10 +33,10 @@ amazonMethods.createProductThumbnails = function(res, itemName, pageNum){
         //resultsPageHTML[pageNum-1] = html;
         html += '</div></div>';
 
-        html += '</div><a class="carousel-control-prev" href="#carouselExampleControls" role="button">' +
-        '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>' + 
-        '<a class="carousel-control-next" href="#carouselExampleControls" role="button">' +
-        '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>';
+        html += '</div><a class="carousel-control-prev" role="button">' +
+        '<img src="/public/images/back.png" class="prev" aria-hidden="true"><span class="sr-only">Previous</span></a>' + 
+        '<a class="carousel-control-next" role="button">' +
+        '<img src="/public/images/next-1.png" class="next" aria-hidden="true"><span class="sr-only">Next</span></a></div>';
 
         res.send(html);
     }).catch(function(err){
