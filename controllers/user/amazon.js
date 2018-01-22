@@ -5,68 +5,52 @@ var client = amazon.createClient({
     awsTag: "jnjohnson-20"
 });
 
-var amazonMethods   = {};
-var resultsPageHTML = [];   // An array which caches the generated HTML from each page of results, so the API doesn't need to be called for pages the user revisits
-var searchName      = '';   // The string that was searched for by the user
+var amazonMethods = {};
 
 amazonMethods.createProductThumbnails = function(res, itemName, pageNum){
-   /* if (searchName == ''){
-        searchName = itemName;
+    var html = '1^^^';
+    if (pageNum === 1){
+        var promise = [];
+        promise[0] = amazonMethods.searchForItems(itemName, pageNum);
+        //promise[1] throws error
+        promise[1] = amazonMethods.searchForItems(itemName, pageNum+1);
+
+        promise[0].then(function(result){
+            html += result;
+            html += '^^^2^^^';
+            promise[1].then(function(result){
+                html += result;
+                res.send(html);
+            });
+        });
+
+        /* for (var i=0; i < 2; i++){
+            promise[i] = amazonMethods.searchForItems(itemName, pageNum + i);
+            promise[i].then(function(result){
+                html += result;
+                html += '^^^2^^^';
+            });
+        } */
     }
-    else if (searchName != itemName){
-        searchName = itemName;
-        resultsPageHTML = [];
-    }
-    else if (resultsPageHTML[pageNum-1] !== undefined){
-        res.send(resultsPageHTML[pageNum-1]);
-    }*/
-    client.itemSearch({
+}
+
+amazonMethods.searchForItems = function(itemName, pageNum){
+    var promise = client.itemSearch({
         itemPage: pageNum,
         ResponseGroup: 'Images, ItemAttributes, Offers',
         SearchIndex: 'VideoGames',
         Title: itemName
     }).then(function(results){
-        var html = '<div id="carouselExampleControls" class="carousel slide"><div class="carousel-inner"><div class="carousel-item active"><div class="row results-page">';
+        var html = '<div class="row results-page">';
         for (var product in results){
             html += amazonMethods.generateHTML(results[product]);
         }
-        //resultsPageHTML[pageNum-1] = html;
-        html += '</div></div>';
+        html += '</div>';
 
-        html += '</div><a class="carousel-control-prev" role="button">' +
-        '<img src="/public/images/back.png" class="prev" aria-hidden="true"><span class="sr-only">Previous</span></a>' + 
-        '<a class="carousel-control-next" role="button">' +
-        '<img src="/public/images/next-1.png" class="next" aria-hidden="true"><span class="sr-only">Next</span></a></div>';
-
-        res.send(html);
+        return html;
     }).catch(function(err){
         console.log(err);
     });
-}
-
-amazonMethods.searchForItems = function(itemName, pageNum){
-    var promise = client.itemSearch({
-            itemPage: pageNum,
-            ResponseGroup: 'Images, ItemAttributes, Offers',
-            SearchIndex: 'VideoGames',
-            Title: itemName
-        }).then(function(results){
-            var html = '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel"><div class="carousel-inner"><div class="carousel-item active">';
-            for (var product in results){
-                html += amazonMethods.generateHTML(results[product]);
-            }
-            html += '</div><div class="carousel-item"><img class="d-block w-100" src="http://placehold.it/400x400" alt="Second slide"></div><div class="carousel-item"><img class="d-block w-100" src="http://placehold.it/400x400" alt="Third slide"></div>';
-
-            html += '</div><a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
-            '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>' + 
-            '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
-            '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>';
-
-            resultsPageHTML[pageNum-1] = html;
-            return html;
-        }).catch(function(err){
-            console.log(err);
-        });
     return promise;
 }
 

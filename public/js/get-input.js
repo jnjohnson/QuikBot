@@ -1,6 +1,14 @@
 user = {}
 
 var searchValidation = /^[-\sa-zA-Z0-9]+$/;
+var carouselHTML = '<div id="amznCarousel" class="carousel slide"><div class="carousel-inner">' + 
+'<div class="carousel-item active"></div><div class="carousel-item"><img src="http://placehold.it/1000x592">' +
+'</div><div class="carousel-item"><img src="http://placehold.it/1000x592">' +
+'</div></div><a class="carousel-control-prev" href="#amznCarousel" role="button" data-slide="prev">' +
+'<img src="/public/images/back.png" class="prev" aria-hidden="true">' +
+'<span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#amznCarousel" role="button" data-slide="next">' +
+'<img src="/public/images/next-1.png" class="next" aria-hidden="true">' + 
+'<span class="sr-only">Next</span></a></div>';
 
 user.init = function(){
     var itemName;
@@ -38,7 +46,10 @@ user.init = function(){
                         createErrorMsg("An error occurred");
                     }
                     else {
-                        document.getElementById("searchResults").innerHTML = res.responseText;
+                        document.getElementById("searchResults").innerHTML = carouselHTML;
+                        $('.carousel').carousel({interval: false});
+                        console.log(res.responseText);
+                        //document.getElementsByClassName("carousel-item")[0].innerHTML = res.responseText;
                     }
                 }, data);
             }
@@ -46,7 +57,7 @@ user.init = function(){
 	}
 }
 
-function newPage(itemName, pageNum){
+function sendSearch(itemName, pageNum){
     var data = {};
     data.itemName   = itemName;
     data.pageNum    = pageNum;
