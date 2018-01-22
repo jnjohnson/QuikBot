@@ -177,8 +177,14 @@
 .lt-ie9 .a-button-primary:hover .a-button-inner {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5d78e', endColorstr='#ffeeb933', GradientType=0); }
 
+html {
+  height: 100%;
+  box-sizing: border-box; }
+
 body {
-  font: 100% Helvetica, sans-serif; }
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding-bottom: 6rem; }
 
 #searchBox {
   display: block;
@@ -195,8 +201,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: stretch;
-  margin-bottom: 100px; }
+  align-items: stretch; }
 
 .error {
   margin-bottom: 0px; }
@@ -204,3 +209,15 @@ body {
 .center-element {
   display: block;
   margin: 0 auto; }
+
+.prev, .next {
+  height: 60px; }
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  font-size: 10px;
+  text-align: center; }
