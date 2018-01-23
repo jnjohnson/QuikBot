@@ -20,7 +20,7 @@ module.exports = {
             res.send("An error occurred");
         }
         else {
-            amazon.createProductThumbnails(res, data.itemName, data.pageNum);
+            amazon.searchForItems(res, data.itemName, data.pageNum);
         }
     }
 }
