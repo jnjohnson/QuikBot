@@ -20,38 +20,26 @@ user.init = function(){
             itemName = document.getElementById("searchBox").value;
             pageNum = 1;
 
-            var data = {};
-            data.itemName   = itemName;
-            data.pageNum    = pageNum;
-
-            if (data.itemName == ''){
+            if (itemName == ''){
                 createErrorMsg("You need to input an item!");
             }
-            else if (!searchValidation.test(data.itemName)) {
+            else if (!searchValidation.test(itemName)) {
                 createErrorMsg("Invalid characters used in search");
             }
-            else if (isNaN(data.pageNum)){
+            else if (isNaN(pageNum)){
                 createErrorMsg("An error occurred");
             }
             else {
-                data = JSON.stringify(data);
-                Ajax.sendRequest('/', function(res){
-                    if (res.responseText == "no item"){
-                        createErrorMsg("You need to input an item!");
-                    }
-                    else if (res.responseText == "invalid input"){
-                        createErrorMsg("Invalid characters used in search");
-                    }
-                    else if (res.responseText == "An error occurred"){
-                        createErrorMsg("An error occurred");
-                    }
-                    else {
-                        document.getElementById("searchResults").innerHTML = carouselHTML;
-                        $('.carousel').carousel({interval: false});
-                        console.log(res.responseText);
-                        //document.getElementsByClassName("carousel-item")[0].innerHTML = res.responseText;
-                    }
-                }, data);
+                var searchResult = sendSearch(itemName, pageNum);
+
+                //Need sendSearch to return a promise as it is an async function
+                //In the success function of the promise, insert carousel code and generated html from amazon,
+                //generate the next page of search results, and attach an event listener to the 'next' button
+
+                if (searchResult != false){
+                    document.getElementById("searchResults").innerHTML = carouselHTML;
+                    document.getElementsByClassName("carousel-item")[0].innerHTML = searchResult;
+                }
             }
         }, false);
 	}
@@ -74,8 +62,9 @@ function sendSearch(itemName, pageNum){
             createErrorMsg("An error occurred");
         }
         else {
-            //do stuff?
+            return res.responseText;
         }
+        return false;
     }, data);
 }
 
