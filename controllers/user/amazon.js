@@ -7,35 +7,8 @@ var client = amazon.createClient({
 
 var amazonMethods = {};
 
-amazonMethods.createProductThumbnails = function(res, itemName, pageNum){
-    var html = '1^^^';
-    if (pageNum === 1){
-        var promise = [];
-        promise[0] = amazonMethods.searchForItems(itemName, pageNum);
-        //promise[1] throws error
-        promise[1] = amazonMethods.searchForItems(itemName, pageNum+1);
-
-        promise[0].then(function(result){
-            html += result;
-            html += '^^^2^^^';
-            promise[1].then(function(result){
-                html += result;
-                res.send(html);
-            });
-        });
-
-        /* for (var i=0; i < 2; i++){
-            promise[i] = amazonMethods.searchForItems(itemName, pageNum + i);
-            promise[i].then(function(result){
-                html += result;
-                html += '^^^2^^^';
-            });
-        } */
-    }
-}
-
-amazonMethods.searchForItems = function(itemName, pageNum){
-    var promise = client.itemSearch({
+amazonMethods.searchForItems = function(res, itemName, pageNum){
+    client.itemSearch({
         itemPage: pageNum,
         ResponseGroup: 'Images, ItemAttributes, Offers',
         SearchIndex: 'VideoGames',
@@ -46,12 +19,11 @@ amazonMethods.searchForItems = function(itemName, pageNum){
             html += amazonMethods.generateHTML(results[product]);
         }
         html += '</div>';
-
-        return html;
+        
+        res.send(html);
     }).catch(function(err){
         console.log(err);
     });
-    return promise;
 }
 
 amazonMethods.generateHTML = function(result){
