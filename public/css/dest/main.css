@@ -213,6 +213,9 @@ body {
 .prev, .next {
   height: 60px; }
 
+.hidden {
+  display: none; }
+
 .footer {
   position: absolute;
   right: 0;
