@@ -82,6 +82,10 @@ function getNewSlide(itemName, newPageNum){
     if (newPageNum === 2){
         document.getElementsByClassName("carousel-control-prev")[0].classList.remove("hidden");
     }
+    else if (newPageNum > 10){
+        //Create new slide that provides link to scraper page
+        return;
+    }
 
     if (newPageNum == document.getElementsByClassName("carousel-item").length){
         var promise = sendSearch(itemName, newPageNum+1);
